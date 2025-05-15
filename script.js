@@ -2,7 +2,7 @@ const historyDiv = document.getElementById('history');
 const messageInput = document.getElementById('message');
 const sendBtn = document.getElementById('sendBtn');
 
-const API_URL = "https://in.elastic.io/hook/6825b675d63ff200122247c2";
+const API_URL = "https://cors-anywhere.herokuapp.com/https://in.elastic.io/hook/6825b675d63ff200122247c2";
 
 function addMessage(content, sender) {
   const msg = document.createElement('div');
@@ -29,6 +29,7 @@ sendBtn.addEventListener('click', async () => {
     });
 
     const result = await response.json();
+    console.log('result', result);
     addMessage(result.reply || 'No reply received', 'bot');
   } catch (err) {
     addMessage('Error: ' + err.message, 'bot');
