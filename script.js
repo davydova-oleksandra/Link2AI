@@ -1,0 +1,36 @@
+const historyDiv = document.getElementById('history');
+const messageInput = document.getElementById('message');
+const sendBtn = document.getElementById('sendBtn');
+
+const API_URL = "https://in.elastic.io/hook/6825b675d63ff200122247c2";
+
+function addMessage(content, sender) {
+  const msg = document.createElement('div');
+  msg.className = sender === 'user' ? 'user-msg' : 'bot-msg';
+  msg.textContent = (sender === 'user' ? "You: " : "Server: ") + content;
+  historyDiv.appendChild(msg);
+  historyDiv.scrollTop = historyDiv.scrollHeight;
+}
+
+sendBtn.addEventListener('click', async () => {
+  const text = messageInput.value.trim();
+  if (!text) return;
+
+  addMessage(text, 'user');
+  messageInput.value = '';
+
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: text })
+    });
+
+    const result = await response.json();
+    addMessage(result.reply || 'No reply received', 'bot');
+  } catch (err) {
+    addMessage('Error: ' + err.message, 'bot');
+  }
+});
