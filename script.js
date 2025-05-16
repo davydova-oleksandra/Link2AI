@@ -38,15 +38,16 @@ sendBtn.addEventListener('click', async () => {
     });
 
     const result = await response.json();
+    const reply = result.reply[0];
 
     messageHistory.push({
     role: 'assistant',
     content: [
-        { type: 'text', text: result.reply }
+        { type: 'text', text: reply }
     ]
     });
 
-    addMessage(result.reply || 'No reply received', 'bot');
+    addMessage(reply || 'No reply received', 'bot');
   } catch (err) {
     addMessage('Error: ' + err.message, 'bot');
   }
