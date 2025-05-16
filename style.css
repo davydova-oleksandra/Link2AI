@@ -1,31 +1,24 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 30px;
-  background-color: #f9f9f9;
-}
-
-#history {
-  border: 1px solid #ccc;
-  padding: 10px;
-  height: 300px;
-  overflow-y: auto;
-  background-color: #fff;
-  margin-bottom: 10px;
-}
-
-#message {
-  width: 80%;
-  padding: 10px;
-}
-
-#sendBtn {
-  padding: 10px 20px;
+#history div {
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  white-space: pre-wrap;
 }
 
 .user-msg {
-  color: blue;
+  background-color: #dff0d8;
+  align-self: flex-end;
 }
 
 .bot-msg {
-  color: green;
+  background-color: #e0e0e0;
+  align-self: flex-start;
+}
+
+#history {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }

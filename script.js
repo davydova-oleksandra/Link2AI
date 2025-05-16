@@ -9,10 +9,19 @@ const API_URL = "https://cors-anywhere.herokuapp.com/https://in.elastic.io/hook/
 function addMessage(content, sender) {
   const msg = document.createElement('div');
   msg.className = sender === 'user' ? 'user-msg' : 'bot-msg';
-  msg.textContent = (sender === 'user' ? "You: " : "AI agent: ") + content;
+
+  const prefix = sender === 'user' ? "You: " : "AI agent: ";
+
+  if (sender === 'bot') {
+    msg.innerHTML = `<strong>${prefix}</strong>` + marked.parse(content);
+  } else {
+    msg.textContent = prefix + content;
+  }
+
   historyDiv.appendChild(msg);
   historyDiv.scrollTop = historyDiv.scrollHeight;
 }
+
 
 sendBtn.addEventListener('click', async () => {
   const text = messageInput.value.trim();
