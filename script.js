@@ -4,7 +4,7 @@ const sendBtn = document.getElementById('sendBtn');
 
 const messageHistory = [];
 
-const API_URL = "https://cors-anywhere.herokuapp.com/https://in.elastic.io/hook/6825b675d63ff200122247c2";
+const API_URL = "https://cors-proxy.psteam.vip/proxy?url=https://in.elastic.io/hook/6825b675d63ff200122247c2";
 
 function addMessage(content, sender) {
   const msg = document.createElement('div');
@@ -13,7 +13,7 @@ function addMessage(content, sender) {
   const prefix = sender === 'user' ? "You: " : "AI agent: ";
 
   if (sender === 'bot') {
-    msg.innerHTML = `<strong>${prefix}</strong>` + marked.parse(content);
+    msg.innerHTML = prefix + marked.parse(content);
   } else {
     msg.textContent = prefix + content;
   }
